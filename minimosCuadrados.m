@@ -2,10 +2,10 @@
 %abcisas = input("ingrese abcisas \n");
 %ordenadas = input ("ingrese ordenadas \n");
 abcisas = [ 1 2 3 4];
-ordenadas=[4 2 1.2 2];
+ordenadas=[1 2 1.2 2];
 cantAbcisas = length(abcisas);
 hold on ;
-sprintf("cantidad de puntos ingresados es : %f",cantAbcisas);
+sprintf("cantidad de puntos ingresados es : %f",cantAbcisas)
 sx1=0;
 sx2=0;
 sx3=0;
@@ -103,4 +103,25 @@ legend([num2str(parabola_a),'x^2 +',num2str(parabola_b),'x+',num2str(parabola_c)
       [num2str(potencial_b),'x**',num2str(potencial_a)],
       [num2str(homografica_a),'/','(x+(',num2str(homografica_b),'))']);
 print('minimos cuadrados.png','-dpng');
-closeplot;
+%---------- errores
+disp("---------by Jhon Daniel ,Olmedo Paco ");
+errorDeRecta = 0;
+errorDePotencial = 0;
+errorDeExponencial  = 0;
+errorDeParabola=0;
+errorDeHomografica=0;
+for i=1:cantDePuntos
+  xi=abcisas(i);
+  yi=ordenadas(i);
+  errorDeParabola=errorDeParabola+((parabola_polinomio(xi)-yi).^2)
+  errorDeExponencial=errorDeExponencial+((exponencial_funcion(xi)-yi).^2);
+  errorDeRecta=errorDeRecta+((recta_funcion(xi)-yi).^2);
+  errorDeHomografica=errorDeHomografica+((homografica_funcion(xi)-yi).^2);
+  errorDePotencial=errorDePotencial+((potencial_funcion(xi)-yi).^2);
+endfor
+tabla_de_errores = ['error de recta :        ' num2str(errorDeRecta);
+                    'error de parabola:      ' num2str(errorDeParabola);
+                    'error de la potencial:  ' num2str(errorDePotencial);
+                    'error de la homografica:' num2str(errorDeHomografica);
+                    'error de la exponencial:' num2str(errorDeExponencial) ]
+%closeplot;
