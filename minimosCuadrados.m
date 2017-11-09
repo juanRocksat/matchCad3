@@ -1,8 +1,8 @@
-
-%abcisas = input("ingrese abcisas \n");
-%ordenadas = input ("ingrese ordenadas \n");
-abcisas = [ 1 2 3 4];
-ordenadas=[1 2 1.2 2];
+disp("-----------------------------------------------------");
+abcisas = input("ingrese abcisas \n");
+ordenadas = input ("ingrese ordenadas \n");
+%%abcisas = [ 1 2 3 4];
+%%ordenadas=[1 2 1.2 2];
 cantAbcisas = length(abcisas);
 hold on ;
 sprintf("cantidad de puntos ingresados es : %f",cantAbcisas)
@@ -125,3 +125,4 @@ tabla_de_errores = ['error de recta :        ' num2str(errorDeRecta);
                     'error de la homografica:' num2str(errorDeHomografica);
                     'error de la exponencial:' num2str(errorDeExponencial) ]
 %closeplot;
+disp("-----------------------------------------------------");
