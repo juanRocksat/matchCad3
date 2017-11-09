@@ -1,8 +1,8 @@
 
 %abcisas = input("ingrese abcisas \n");
 %ordenadas = input ("ingrese ordenadas \n");
-abcisas = [ 1 2 3 ];
-ordenadas=[1 2 1.2 ];
+abcisas = [ 1 2 3 4];
+ordenadas=[4 2 1.2 2];
 cantAbcisas = length(abcisas);
 hold on ;
 sprintf("cantidad de puntos ingresados es : %f",cantAbcisas);
@@ -84,15 +84,23 @@ parabola_polinomio = parabola_a*(x.^2)+(parabola_b*x)+parabola_c;
 exponencial_funcion = exponencial_b*(e.^(exponencial_a*x));
 recta_funcion=recta_a*x+recta_b;
 potencial_funcion = potencial_b*(x.^(potencial_a));
-homografica_funcion = homografica_a./(x+homografica_b);
+homografica_funcion = homografica_a./(x.+homografica_b);
 %plot(abcisas,ordenadas);
+%%minimosCuadrados = figure
+%clearplot;
+axis;
 plot(x,parabola_polinomio,'r','linewidth',1);
-plot(x,exponencial_funcion,'g');% g de green
+plot(x,exponencial_funcion,'g','linewidth',1);% g de green
 plot(x,recta_funcion,'k','linewidth',2);%negro
-plot(x,potencial_funcion,'m');%magenta
-plot(x,homografica_funcion,'b');%blue
+plot(x,potencial_funcion,'m','linewidth',1);%magenta,, c cian
+plot(x,homografica_funcion,'b','linewidth',2);%blue
 title("Aproximaciones ");
 xlabel("<----------Abcisas------------------>");
 ylabel("<------------ordenadas------------->");
-legend('parabola','exponencial','recta','potencial','homografica');
+legend([num2str(parabola_a),'x^2 +',num2str(parabola_b),'x+',num2str(parabola_c)],
+      [num2str(exponencial_b),'e**(',num2str(exponencial_a),'x)'],
+      [num2str(recta_a),'x+',num2str(recta_b)],
+      [num2str(potencial_b),'x**',num2str(potencial_a)],
+      [num2str(homografica_a),'/','(x+(',num2str(homografica_b),'))']);
 print('minimos cuadrados.png','-dpng');
+closeplot;
