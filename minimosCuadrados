@@ -1,0 +1,61 @@
+abcisas = input("ingrese abcisas \n");
+ordenadas = input ("ingrese ordenadas \n");
+cantAbcisas = length(abcisas);
+hold on ;
+sprintf("cantidad de puntos ingresados es : %f",cantAbcisas);
+sx1=0;
+sx2=0;
+sx3=0;
+sx4=0;
+sy1=0;
+sy2=0;
+sy3=0;
+sy4=0;
+sfxPorx=0;
+sfxPorx2=0;
+mediaX=0;
+mediaY=0;
+sLnDeLaImagen=0;
+sLnDex=0;
+sLnDeLaImagenPorLaImagen=0;
+sLnDexAl2=0;
+sLnDeLaImagenPorLnDex=0;
+
+cantDePuntos=length(abcisas);
+
+for i=1:cantDePuntos
+  xi=abcisas(i);
+  yi=ordenadas(i);
+    sx1=sx1+xi;
+    sy1=sy1+yi;
+    sx2=sx2+(xi^2);
+    sx3=sx3+(xi^3);
+    sx4=sx4+(xi^4);
+    sfxPorx=sfxPorx+xi*yi;
+    sfxPorx2=sfxPorx2+xi*xi*yi;
+    sLnDeLaImagen=sLnDeLaImagen+log(yi);
+    sLnDeLaImagenPorLaImagen=sLnDeLaImagenPorLaImagen+log(yi)*yi;
+    sLnDeLaImagenPorLnDex=sLnDeLaImagenPorLnDex+log(yi)*log(xi);
+    sLnDex = sLnDex+log(xi);
+    sLnDexAl2 = sLnDexAl2+(log(xi)*log(xi));
+endfor
+matrizNormalParaLaParabola = [sx4 sx3 sx2 ;
+                              sx1 sx2 sx3  ;
+                              sx2 sx3  cantDePuntos];
+matrizNormalParaLaExponencial=
+[sx2 sx1;
+sx1 cantDePuntos]; 
+terminosIndependientesDeLaParabola = [sfxPorx2;sfxPorx] ; %matriz de un vector columna
+terminosIndependientesDeLaExponencial = [sLnDeLaImagenPorLaImagen;sLnDeLaImagen];
+coeficientesDeLaParabola  = inv(matrizNormalParaLaParabola)*terminosIndependientesDeLaParabola;%[a;b;c] para ax^2+bx+c
+coeficientesDeLaExponencial = inv(matrizNormalParaLaExponencial)*terminosIndependientesDeLaExponencial; % [a;B] 
+aParabola = coeficientesDeLaParabola(1,1);
+bParabola = coeficientesDeLaParabola(2,1);
+cParabola = coeficientesDeLaParabola(3,1);
+aExponencial = coeficientesDeLaExponencial(1,1);
+bExponencial  = e^(coeficientesDeLaExponencial(2,1));                           
+x = (abcisas(1,1):0,1:abcisas(1,cantDePuntos));
+x_2=x;
+parabola_polinomio= aParabola*(x*x)+(bParabola*x)+cParabola;
+exponencial_funcion = bExponencial*(e^(aExponencial*x));
+plot(x,parabola_polinomio,x_2,exponencial_funcion);
